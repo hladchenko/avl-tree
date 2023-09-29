@@ -1,6 +1,6 @@
 package com.bobocode.avltree;
 
-import com.bobocode.avltree.printer.BinaryTreePrinter;
+import com.bobocode.avltree.printer.WindowPrinter;
 import com.bobocode.avltree.printer.Printer;
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
     avlTree.insert(2);
     avlTree.insert(3);
 
-    Printer printer = new BinaryTreePrinter();
+    Printer printer = new WindowPrinter();
     printer.print(avlTree.root);
   }
 }
