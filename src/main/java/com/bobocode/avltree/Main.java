@@ -1,5 +1,6 @@
 package com.bobocode.avltree;
 
+import com.bobocode.avltree.printer.ConsolePrinter;
 import com.bobocode.avltree.printer.WindowPrinter;
 import com.bobocode.avltree.printer.Printer;
 
@@ -11,7 +12,7 @@ public class Main {
     avlTree.insert(2);
     avlTree.insert(3);
 
-    Printer printer = new WindowPrinter();
+    Printer printer = new ConsolePrinter();
     printer.print(avlTree.root);
   }
 }
