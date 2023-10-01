@@ -18,13 +18,13 @@ public class AVLTree {
       if (node.left == null) {
         node.left = newNode;
       } else {
-        insert(node.left, value);
+        node.left = insert(node.left, value);
       }
     } else if (newNode.value > node.value) {
       if (node.right == null) {
         node.right = newNode;
       } else {
-        insert(node.right, value);
+        node.right = insert(node.right, value);
       }
     }
     calculateHeight(node);
@@ -39,30 +39,26 @@ public class AVLTree {
     return node;
   }
 
-  private Node leftRotate(Node node) {
-    System.out.println("leftRotate: " + node.value);
-    var parentNode = node;
-    var child = node.right;
+  private Node leftRotate(Node subtreeRoot) {
+    var child = subtreeRoot.right;
 
-    if (parentNode.left == null) {
-      parentNode.left = new Node(parentNode.value);
-      parentNode.value = child.value;
-      parentNode.height = child.height;
-      parentNode.right = child.right;
-    } else {
-      var leftSubTree = parentNode.left;
-      parentNode.left = new Node(parentNode.value);
-      parentNode.left.left = leftSubTree;
-      parentNode.value = child.value;
-      parentNode.height = child.height;
-      parentNode.right = child.right;
-    }
-    return node;
+    subtreeRoot.right = child.left;
+    calculateHeight(subtreeRoot);
+    child.left = subtreeRoot;
+    calculateHeight(child);
+
+    return child;
   }
 
-  private Node rightRotate(Node node) {
-    System.out.println("rightRotate");
-    return node;
+  private Node rightRotate(Node subtreeRoot) {
+    var child = subtreeRoot.left;
+
+    subtreeRoot.left = child.right;
+    calculateHeight(subtreeRoot);
+    child.right = subtreeRoot;
+    calculateHeight(child);
+
+    return child;
   }
 
   private void calculateHeight(Node node) {
