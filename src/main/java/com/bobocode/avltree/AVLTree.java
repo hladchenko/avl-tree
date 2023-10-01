@@ -4,11 +4,12 @@ public class AVLTree {
 
   public Node root;
 
-  public void insert(int value) {
-    insert(this.root, value);
+  public Node insert(int value) {
+    this.root = insert(this.root, value);
+    return root;
   }
 
-  private void insert(Node node, int value) {
+  private Node insert(Node node, int value) {
     var newNode = new Node(value);
     if (this.root == null) {
       this.root = new Node(value);
@@ -31,13 +32,14 @@ public class AVLTree {
     var balance = calculateBalance(node);
 
     if (balance > 1) {
-      rightRotate(node);
+      return rightRotate(node);
     } else if (balance < -1) {
-      leftRotate(node);
+      return leftRotate(node);
     }
+    return node;
   }
 
-  private void leftRotate(Node node) {
+  private Node leftRotate(Node node) {
     System.out.println("leftRotate: " + node.value);
     var parentNode = node;
     var child = node.right;
@@ -55,10 +57,12 @@ public class AVLTree {
       parentNode.height = child.height;
       parentNode.right = child.right;
     }
+    return node;
   }
 
-  private void rightRotate(Node node) {
+  private Node rightRotate(Node node) {
     System.out.println("rightRotate");
+    return node;
   }
 
   private void calculateHeight(Node node) {
