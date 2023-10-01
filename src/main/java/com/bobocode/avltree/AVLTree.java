@@ -66,15 +66,18 @@ public class AVLTree {
     return child;
   }
 
+  private int getHeight(Node node) {
+    if (node == null) {
+      return 0;
+    }
+    return node.height;
+  }
+
   private void calculateHeight(Node node) {
     if (node.left == null && node.right == null) {
       node.height = 0;
-    } else if (node.left == null) {
-      node.height = 1 + node.right.height;
-    } else if (node.right == null) {
-      node.height = 1 + node.left.height;
     } else {
-      node.height = 1 + Math.max(node.left.height, node.right.height);
+      node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
     }
   }
 
