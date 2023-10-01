@@ -31,9 +31,22 @@ public class AVLTree {
 
     var balance = calculateBalance(node);
 
-    if (balance > 1) {
+    // LL rotation
+    if (balance > 1 && value < node.left.value) {
       return rightRotate(node);
-    } else if (balance < -1) {
+    }
+    // RR rotation
+    if (balance < -1 && value > node.right.value) {
+      return leftRotate(node);
+    }
+    // LR rotation
+    if (balance > 1 && value > node.left.value) {
+      node.left = leftRotate(node.left);
+      return rightRotate(node);
+    }
+    // RL rotation
+    if (balance < -1 && value < node.right.value) {
+      node.right = rightRotate(node.right);
       return leftRotate(node);
     }
     return node;
