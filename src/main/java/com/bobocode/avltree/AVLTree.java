@@ -15,9 +15,9 @@ public class AVLTree {
       return new Node(value);
     }
     if (newNode.value < node.value) {
-        node.left = insert(node.left, value);
+      node.left = insert(node.left, value);
     } else if (newNode.value > node.value) {
-        node.right = insert(node.right, value);
+      node.right = insert(node.right, value);
     }
 
     calculateHeight(node);
@@ -74,26 +74,14 @@ public class AVLTree {
   }
 
   private void calculateHeight(Node node) {
-    if (node.left == null && node.right == null) {
-      node.height = 0;
-    } else {
-      node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
-    }
+    node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
   }
 
   private int calculateBalance(Node node) {
-    if (node.left == null && node.right == null) {
-      return 0;
-    } else if (node.left == null) {
-      return -1 - node.right.height;
-    } else if (node.right == null) {
-      return node.left.height + 1;
-    } else {
-      return node.left.height - node.right.height;
-    }
+    return getHeight(node.left) - getHeight(node.right);
   }
 
   public int height() {
-    return root.height;
+    return getHeight(root);
   }
 }
